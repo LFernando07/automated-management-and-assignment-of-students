@@ -1,0 +1,49 @@
+<div class="nav-wrapper">
+  <nav class="main-nav">
+    <!-- Brand -->
+    <a href="/" class="nav-brand">
+      <img
+        src="https://avatars.githubusercontent.com/u/183861407?v=4"
+        alt="FerDev avatar"
+        class="nav-brand-avatar"
+      />
+      <span class="nav-brand-name">FerDev._</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-label="Toggle navigation"
+      onclick="document.getElementById('nav-links').classList.toggle('open')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <!-- Nav links -->
+    <ul class="nav-links" id="nav-links">
+      <li>
+        <a href="/" class="nav-link" id="nav-students">
+          <i class="fa fa-users nav-link-icon"></i>
+          Students
+        </a>
+      </li>
+      <li>
+        <a href="/projects" class="nav-link" id="nav-projects">
+          <i class="fa fa-folder nav-link-icon"></i>
+          Projects
+        </a>
+      </li>
+      <li>
+        <a href="/assignment" class="nav-link" id="nav-assignment">
+          <i class="fa fa-tasks nav-link-icon"></i>
+          Assignment
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,118 @@
+<div class="page-container animate-fade-in">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <h2 class="page-title">
+        <i class="fa fa-users" style="font-size:1.4rem; color: var(--accent-cyan); margin-right:0.5rem;"></i>
+        Students
+      </h2>
+      <span class="badge badge-indigo">{{ students.length }} total</span>
+    </div>
+
+    <a routerLink="/students/addstudent" class="action-link action-link-add" id="btn-add-student">
+      <i class="fa fa-user-plus"></i>
+      New Student
+    </a>
+  </div>
+
+  <!-- Students Table Card -->
+  <div class="card" style="padding:0; overflow:hidden;">
+    <table>
+      <thead class="text-left">
+        <tr>
+          <th style="width:80px;">ID</th>
+          <th>Name</th>
+          <th>Arage</th>
+          <th style="text-align:center; width:320px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (student of students; track student.id) {
+        <tr>
+          <td>
+            <span class="badge badge-indigo" style="font-size:0.75rem;">#{{ student.id }}</span>
+          </td>
+          <td>
+            <div style="display:flex; align-items:center; gap:0.625rem;">
+              <div style="
+                  width:32px; height:32px; border-radius:50%;
+                  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:0.75rem; font-weight:700; flex-shrink:0;
+                ">
+                {{ student.name.charAt(0).toUpperCase() }}
+              </div>
+              <span style="font-weight:500;">{{ student.name }}</span>
+            </div>
+          </td>
+          <td>
+            <span
+              [class]="'badge ' + (+student.average >= 9 ? 'badge-emerald' : +student.average >= 7 ? 'badge-amber' : 'badge-rose')">
+              {{ student.average }}
+            </span>
+          </td>
+          <td style="text-align:center;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:0.375rem; flex-wrap:wrap;">
+              <a [routerLink]="['/students/updatestudent', student.id]" class="action-link action-link-edit"
+                [id]="'btn-edit-' + student.id">
+                <i class="fa fa-edit"></i> Edit
+              </a>
+              <a [routerLink]="['/students', student.id, 'projects']" class="action-link action-link-folder"
+                [id]="'btn-projects-' + student.id">
+                <i class="fa fa-folder"></i> Projects
+              </a>
+              <a (click)="deleteStudent(student.id)" class="action-link action-link-delete"
+                [id]="'btn-delete-' + student.id">
+                <i class="fa fa-trash"></i> Delete
+              </a>
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="4">
+            <div class="empty-state">
+              <div class="empty-state-icon"><i class="fa fa-users"></i></div>
+              <div class="empty-state-title">No students yet</div>
+              <div class="empty-state-desc">Create your first student to get started</div>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Max Projects Config -->
+  <div class="card" style="margin-top:1.5rem;">
+    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+      <h3 style="font-size:1rem; font-weight:700; color:var(--text-primary);">
+        <i class="fa fa-sliders" style="color:var(--accent-amber); margin-right:0.4rem;"></i>
+        Project Assignment Config
+      </h3>
+      <span class="badge badge-amber">Current: {{ maxProjectsPerStudent }}</span>
+    </div>
+
+    <form (ngSubmit)="updateMaxProjectsPerStudent()"
+      style="display:flex; align-items:flex-end; gap:1rem; flex-wrap:wrap;" id="form-max-projects">
+      <div class="form-group" style="flex:1; min-width:180px; margin-bottom:0;">
+        <label for="maxProjectsPerStudent">Max Projects Per Student</label>
+        <input type="number" name="maxProjectsPerStudent" id="maxProjectsPerStudent" min="1" step="1"
+          placeholder="Enter max projects" [(ngModel)]="tempNumber" />
+      </div>
+      <button type="submit" class="btn-primary" style="flex-shrink:0; height:42px;">
+        <i class="fa fa-save"></i>
+        Update
+      </button>
+    </form>
+
+    @if (maxProjectsPerStudentS) {
+    <div style="margin-top:0.75rem;" class="badge badge-emerald">
+      <i class="fa fa-check"></i>
+      {{ maxProjectsPerStudentS }}
+    </div>
+    }
+  </div>
+
+</div>

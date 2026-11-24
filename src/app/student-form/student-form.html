@@ -1,0 +1,78 @@
+<div class="page-container animate-fade-in">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <a routerLink="/students" class="action-link action-link-edit" style="padding:0.4rem 0.75rem; font-size:0.8rem;">
+        <i class="fa fa-arrow-left"></i>
+      </a>
+      <h2 class="page-title">
+        <i class="fa fa-user-edit" style="font-size:1.2rem; color:var(--accent-primary); margin-right:0.5rem;"></i>
+        {{ id ? 'Edit Student' : 'New Student' }}
+      </h2>
+    </div>
+    <span class="badge" [class]="id ? 'badge-amber' : 'badge-emerald'">
+      {{ id ? 'Update Mode' : 'Create Mode' }}
+    </span>
+  </div>
+
+  <!-- Form Card -->
+  <div class="card" style="max-width:520px;">
+    <form (ngSubmit)="upsert()" id="student-form">
+
+      <div class="form-group">
+        <label for="name">
+          <i class="fa fa-user" style="color:var(--accent-cyan); margin-right:0.35rem;"></i>
+          Student Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter full name"
+          [(ngModel)]="student.name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="average">
+          <i class="fa fa-star" style="color:var(--accent-amber); margin-right:0.35rem;"></i>
+          Academic Average
+          <span style="color:var(--text-muted); font-weight:400;">(0 – 10)</span>
+        </label>
+        <input
+          type="number"
+          id="average"
+          name="average"
+          placeholder="e.g. 8.5"
+          min="0"
+          max="10"
+          step="0.1"
+          [(ngModel)]="student.average"
+          required
+        />
+      </div>
+
+      @if (isOutOfRange) {
+        <div class="alert-error" style="margin-bottom:1.25rem;">
+          <i class="fa fa-exclamation-triangle"></i>
+          Average must be between <strong>0</strong> and <strong>10</strong>
+        </div>
+      }
+
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <button type="submit" class="btn-primary" id="btn-submit-student" style="flex:1; justify-content:center; min-width:120px;">
+          <i class="fa" [class]="id ? 'fa-save' : 'fa-plus'"></i>
+          {{ id ? 'Update Student' : 'Create Student' }}
+        </button>
+        <a routerLink="/students" class="btn-ghost" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.25rem; text-decoration:none; border-radius:var(--radius-btn); font-size:0.875rem; font-weight:600; cursor:pointer;">
+          <i class="fa fa-times"></i>
+          Cancel
+        </a>
+      </div>
+
+    </form>
+  </div>
+
+</div>

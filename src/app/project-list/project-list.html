@@ -1,0 +1,89 @@
+<div class="page-container animate-fade-in">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <h2 class="page-title">
+        <i class="fa fa-folder" style="font-size:1.3rem; color:var(--accent-cyan); margin-right:0.5rem;"></i>
+        Projects
+      </h2>
+      <span class="badge badge-cyan">{{ projects.length }} total</span>
+    </div>
+  </div>
+
+  <!-- Projects Table Card -->
+  <div class="card" style="padding:0; overflow:hidden; margin-bottom:1.5rem;">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">ID</th>
+          <th>Project Name</th>
+          <th style="text-align:center; width:120px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (project of projects; track project.id) {
+          <tr>
+            <td>
+              <span class="badge badge-cyan" style="font-size:0.75rem;">#{{ project.id }}</span>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:0.625rem;">
+                <div style="
+                  width:32px; height:32px; border-radius:8px;
+                  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-primary));
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:0.85rem; flex-shrink:0;
+                ">
+                  <i class="fa fa-code" style="color:white;"></i>
+                </div>
+                <span style="font-weight:500;">{{ project.name }}</span>
+              </div>
+            </td>
+            <td style="text-align:center;">
+              <a (click)="deleteProject(project.id)" class="action-link action-link-delete" [id]="'btn-delete-project-' + project.id">
+                <i class="fa fa-trash"></i> Delete
+              </a>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">
+              <div class="empty-state">
+                <div class="empty-state-icon"><i class="fa fa-folder-open"></i></div>
+                <div class="empty-state-title">No projects yet</div>
+                <div class="empty-state-desc">Add your first project below</div>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add Project Card -->
+  <div class="card" style="max-width:520px;">
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.25rem;">
+      <i class="fa fa-plus-circle" style="color:var(--accent-emerald); font-size:1.1rem;"></i>
+      <h3 style="font-size:1rem; font-weight:700;">Add New Project</h3>
+    </div>
+    <form (ngSubmit)="addProject()" style="display:flex; gap:0.75rem; align-items:flex-end;" id="form-add-project">
+      <div class="form-group" style="flex:1; margin-bottom:0;">
+        <label for="projectName">Project Name</label>
+        <input
+          type="text"
+          id="projectName"
+          name="name"
+          placeholder="e.g. IoT Project"
+          [(ngModel)]="project.name"
+          required
+        />
+      </div>
+      <button type="submit" class="btn-success" id="btn-create-project" style="flex-shrink:0; height:42px;">
+        <i class="fa fa-plus"></i>
+        Create
+      </button>
+    </form>
+  </div>
+
+</div>

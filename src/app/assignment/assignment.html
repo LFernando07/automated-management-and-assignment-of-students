@@ -1,0 +1,88 @@
+<div class="page-container animate-fade-in">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <h2 class="page-title">
+        <i class="fa fa-tasks" style="font-size:1.2rem; color:var(--accent-primary); margin-right:0.5rem;"></i>
+        Assignment Results
+      </h2>
+    </div>
+    <span class="badge badge-indigo">
+      <i class="fa fa-magic"></i>
+      Auto-Generated
+    </span>
+  </div>
+
+  <!-- Assignment Table Card -->
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div
+      style="padding:1rem 1.5rem; border-bottom:1px solid var(--border-card); display:flex; align-items:center; gap:0.75rem;">
+      <i class="fa fa-info-circle" style="color:var(--accent-cyan);"></i>
+      <span style="font-size:0.875rem; color:var(--text-secondary);">
+        Students are assigned to projects based on their academic average and project preferences.
+      </span>
+    </div>
+
+    <table>
+      <thead class="text-left">
+        <tr>
+          <th>
+            <i class="fa fa-user" style="margin-right:0.4rem;"></i>
+            Student
+          </th>
+          <th>
+            <i class="fa fa-folder" style="margin-right:0.4rem;"></i>
+            Assigned Project
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of assgnmentResult | keyvalue; track $index) {
+        <tr>
+          <td>
+            <div style="display:flex; align-items:center; gap:0.625rem;">
+              <div style="
+                  width:32px; height:32px; border-radius:50%;
+                  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:0.75rem; font-weight:700; flex-shrink:0;
+                ">
+                {{ item.key.charAt(0).toUpperCase() }}
+              </div>
+              <span style="font-weight:500;">{{ item.key }}</span>
+            </div>
+          </td>
+          <td>
+            <div style="display:flex; align-items:center; gap:0.625rem;">
+              <div style="
+                  width:30px; height:30px; border-radius:8px;
+                  background: linear-gradient(135deg, var(--accent-emerald), #059669);
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:0.8rem; flex-shrink:0;
+                ">
+                <i class="fa fa-code" style="color:white;"></i>
+              </div>
+              <span class="badge badge-emerald">{{ item.value }}</span>
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="2">
+            <div class="empty-state">
+              <div class="empty-state-icon"><i class="fa fa-tasks"></i></div>
+              <div class="empty-state-title">No assignments generated</div>
+              <div class="empty-state-desc">
+                Make sure students have their projects configured and try again.
+              </div>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

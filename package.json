@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "prod": "ng serve --configuration=production",
     "test": "ng test",
     "serve:ssr:frontend-sockproject": "node dist/frontend-sockproject/server/server.mjs"
   },
